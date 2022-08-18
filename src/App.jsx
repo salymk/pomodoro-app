@@ -1,8 +1,10 @@
+import { Heading } from '@chakra-ui/react'
 function App() {
 
   return (
     <div>
       pomodoro
+    
       short break
       long break
 
@@ -22,6 +24,8 @@ function App() {
 
       Apply
     </div>
+
+    
   )
 }
 
