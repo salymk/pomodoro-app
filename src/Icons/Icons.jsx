@@ -10,3 +10,66 @@ export function GearIcon(props) {
     </svg>
   );
 }
+
+export function CloseIcon(props) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14">
+      <path
+        {...props}
+        fill="currentColor"
+        fill-rule="evenodd"
+        d="M11.95.636l1.414 1.414L8.414 7l4.95 4.95-1.414 1.414L7 8.414l-4.95 4.95L.636 11.95 5.586 7 .636 2.05 2.05.636 7 5.586l4.95-4.95z"
+        opacity=".5"
+      />
+    </svg>
+  );
+}
+
+export function ArrowUpIcon(props) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="7">
+      <path
+        {...props}
+        fill="none"
+        stroke="currentColor"
+        stroke-opacity=".25"
+        stroke-width="2"
+        d="M1 6l6-4 6 4"
+      />
+    </svg>
+  );
+}
+
+export function ArrowDownIcon(props) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="7">
+      <path
+        {...props}
+        fill="none"
+        stroke="currentColor"
+        stroke-opacity=".25"
+        stroke-width="2"
+        d="M1 1l6 4 6-4"
+      />
+    </svg>
+  );
+}
+
+export function CheckIcon(props) {
+  return (
+    <svg
+      {...props}
+      width="15"
+      height="11"
+      viewBox="0 0 15 11"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M1 5.5L4.95263 9.45263L13.4053 1"
+        stroke="currentColor"
+        stroke-width="2"
+      />
+    </svg>
+  );
+}
