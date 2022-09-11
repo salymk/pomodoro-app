@@ -17,6 +17,7 @@ import {
 } from "@chakra-ui/react";
 import TimerInput from "./TimerInput";
 import FontGroup from "./FontGroup";
+import FontSelector from "../features/font/FontSelector";
 import ColorGroup from "./ColorGroup";
 import { CloseIcon } from "../Icons/Icons";
 
@@ -99,7 +100,7 @@ const SettingsModal = ({ isOpen, onClose }) => {
               </Stack>
               <Divider borderBottomWidth="2px" color="hsla(0, 2%, 89%, 1)" />
               <Stack py="24px">
-                <FontGroup />
+                <FontSelector />
               </Stack>
               <Divider borderBottomWidth="2px" color="hsla(0, 2%, 89%, 1)" />
               <Stack py="24px">
