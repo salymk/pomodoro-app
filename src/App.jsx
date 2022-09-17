@@ -6,14 +6,17 @@ import {
   IconButton,
   useDisclosure,
 } from "@chakra-ui/react";
+import { useSelector, useDispatch } from "react-redux";
 import TimerTabs from "./components/TimerTabs";
 import SettingsModal from "./components/SettingsModal";
 import { GearIcon } from "./Icons/Icons";
 
 function App() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const font = useSelector((state) => state.fontSelector.font);
+
   return (
-    <Center pt="45px" bg="brand.700" minH="100vh" p="24px">
+    <Center pt="45px" bg="brand.700" minH="100vh" p="24px" fontFamily={font}>
       <Box w="410px">
         <VStack>
           <Heading
