@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 
 const Timer = ({ time, state }) => {
   const font = useSelector((state) => state.fontSelector.font);
+  const color = useSelector((state) => state.colorSelector.color);
   return (
     <Flex
       position="relative"
@@ -33,7 +34,7 @@ const Timer = ({ time, state }) => {
           value={100}
           size={["284.05px", "390px"]}
           thickness="3"
-          color="brand.400"
+          color={color}
           capIsRound
           trackColor="none"
         />
@@ -60,8 +61,8 @@ const Timer = ({ time, state }) => {
 
           <Button
             bg="none"
-            _hover={{ color: "brand.400" }}
-            _active={{ color: "brand.400" }}
+            _hover={{ color: color }}
+            _active={{ color: color }}
             fontSize={[".875rem", "1rem"]}
             fontWeight="700"
             lineHeight={["17px", "20px"]}

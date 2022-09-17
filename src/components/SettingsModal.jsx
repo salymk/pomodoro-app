@@ -24,9 +24,12 @@ import ColorGroup from "./ColorGroup";
 import FontGroup from "./FontGroup";
 import { CloseIcon } from "../Icons/Icons";
 import { selectFont } from "../features/font/fontSlice";
+import { selectColor } from "../features/color/colorSlice";
 
 const SettingsModal = ({ isOpen, onClose }) => {
   const font = useSelector((state) => state.fontSelector.font);
+  const color = useSelector((state) => state.colorSelector.color);
+
   const dispatch = useDispatch();
   const {
     register,
@@ -38,6 +41,7 @@ const SettingsModal = ({ isOpen, onClose }) => {
   const onSubmit = (data) => {
     console.log(data);
     dispatch(selectFont(data.font));
+    dispatch(selectColor(data.color));
   };
 
   return (
@@ -135,9 +139,9 @@ const SettingsModal = ({ isOpen, onClose }) => {
               top={["50%", "8%"]}
               bottom="0%"
               p="17px 47px"
-              bg="brand.400"
+              bg={color}
               _hover={{
-                bg: "hsla(0, 91%, 78%, 1)",
+                bg: color,
               }}
               borderRadius="26.5px"
               h="53px"

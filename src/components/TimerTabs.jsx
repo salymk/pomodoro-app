@@ -1,7 +1,10 @@
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
 import Timer from "../components/Timer";
 
 const CustomTab = ({ children }) => {
+  const color = useSelector((state) => state.colorSelector.color);
+
   return (
     <Tab
       color="hsla(226, 100%, 92%, .4)"
@@ -15,7 +18,7 @@ const CustomTab = ({ children }) => {
       _hover={{ color: "brand.300" }}
       _selected={{
         color: "brand.700",
-        bg: "brand.400",
+        bg: color,
         borderRadius: "26.5px",
         fontWeight: "700",
         lineHeight: "17px",
