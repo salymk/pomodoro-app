@@ -6,8 +6,10 @@ import {
   Flex,
   CircularProgress,
 } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
 
 const Timer = ({ time, state }) => {
+  const font = useSelector((state) => state.fontSelector.font);
   return (
     <Flex
       position="relative"
@@ -50,7 +52,8 @@ const Timer = ({ time, state }) => {
             as="h1"
             fontSize={["5rem", "6.25rem"]}
             lineHeight={["99px", "124px"]}
-            letterSpacing={["-4px", "-5px"]}
+            letterSpacing={font === "Space Mono" ? "-10px" : "-5px"}
+            fontWeight={font === "Space Mono" ? 400 : 700}
           >
             {time}
           </Heading>
