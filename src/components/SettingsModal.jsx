@@ -6,22 +6,44 @@ import {
   ModalHeader,
   ModalFooter,
   ModalBody,
-  ModalCloseButton,
   Button,
   Divider,
   Heading,
   Stack,
-  Box,
   Flex,
   IconButton,
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
 } from "@chakra-ui/react";
+import { useSelector, useDispatch } from "react-redux";
+import { useForm, Controller } from "react-hook-form";
+
 import TimerInput from "./TimerInput";
-import FontGroup from "./FontGroup";
-import FontSelector from "../features/font/FontSelector";
 import ColorGroup from "./ColorGroup";
+import FontGroup from "./FontGroup";
 import { CloseIcon } from "../Icons/Icons";
+import { selectFont } from "../features/font/fontSlice";
+import { selectColor } from "../features/color/colorSlice";
 
 const SettingsModal = ({ isOpen, onClose }) => {
+  const font = useSelector((state) => state.fontSelector.font);
+  const color = useSelector((state) => state.colorSelector.color);
+
+  const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+    dispatch(selectFont(data.font));
+    dispatch(selectColor(data.color));
+  };
+
   return (
     <>
       <Modal
@@ -36,7 +58,7 @@ const SettingsModal = ({ isOpen, onClose }) => {
           borderRadius="15px"
           maxWidth={["327px", "540px"]}
           w="100%"
-          // px={["24px", "40px"]}
+          fontFamily={font}
         >
           <Flex
             pt={["24px", "34px"]}
@@ -73,7 +95,7 @@ const SettingsModal = ({ isOpen, onClose }) => {
           </Flex>
           <Divider borderBottomWidth="2px" color="hsla(0, 2%, 89%, 1)" />
           <ModalBody py="0px" px={["24px", "40px"]}>
-            <form>
+            <form id="pomodoro-settings" onSubmit={handleSubmit(onSubmit)}>
               <Heading
                 as="h1"
                 fontWeight="700"
@@ -100,11 +122,11 @@ const SettingsModal = ({ isOpen, onClose }) => {
               </Stack>
               <Divider borderBottomWidth="2px" color="hsla(0, 2%, 89%, 1)" />
               <Stack py="24px">
-                <FontSelector />
+                <FontGroup control={control} name="font" />
               </Stack>
               <Divider borderBottomWidth="2px" color="hsla(0, 2%, 89%, 1)" />
               <Stack py="24px">
-                <ColorGroup />
+                <ColorGroup control={control} name="color" />
               </Stack>
             </form>
           </ModalBody>
@@ -117,9 +139,9 @@ const SettingsModal = ({ isOpen, onClose }) => {
               top={["50%", "8%"]}
               bottom="0%"
               p="17px 47px"
-              bg="brand.400"
+              bg={color}
               _hover={{
-                bg: "hsla(0, 91%, 78%, 1)",
+                bg: color,
               }}
               borderRadius="26.5px"
               h="53px"
@@ -128,6 +150,8 @@ const SettingsModal = ({ isOpen, onClose }) => {
               fontSize="1rem"
               lineHeight="20px"
               color="white"
+              type="submit"
+              form="pomodoro-settings"
               onClick={onClose}
             >
               Apply

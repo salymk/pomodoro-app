@@ -19,8 +19,8 @@ const theme = extendTheme({
   },
 
   fonts: {
-    heading: `Roboto Slab ${base.fonts?.heading}`,
-    body: `Roboto Slab ${base.fonts?.heading}`,
+    heading: ``,
+    body: ``,
   },
   fontSizes: {
     xs: "0.75rem",
