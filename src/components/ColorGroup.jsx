@@ -1,16 +1,14 @@
 import React from "react";
 import {
-  Radio,
-  RadioGroup,
   Stack,
-  Heading,
   Flex,
   useRadio,
   useRadioGroup,
-  chakra,
   Box,
-  Image,
+  FormControl,
+  FormLabel,
 } from "@chakra-ui/react";
+import { useController } from "react-hook-form";
 import { CheckIcon } from "../Icons/Icons";
 
 function RadioColor(props) {
@@ -60,44 +58,50 @@ function RadioColor(props) {
   );
 }
 
-const ColorGroup = () => {
-  const colors = ["brand.400", "brand.500", "brand.600"];
-
-  const { getRootProps, getRadioProps, value } = useRadioGroup({
-    name: "font",
+const ColorGroup = ({ control, name }) => {
+  const { field } = useController({
+    name: name,
+    control,
     defaultValue: "brand.400",
-    onChange: console.log(),
   });
 
-  const group = getRootProps();
+  const { getRootProps, getRadioProps } = useRadioGroup({
+    ...field,
+  });
+
+  const colors = ["brand.400", "brand.500", "brand.600"];
 
   return (
     <>
-      <Flex
-        flexDirection={["column", "row"]}
-        justifyContent={[null, "space-between"]}
-        alignItems={["center", "baseline"]}
-      >
-        <Heading
-          as="h2"
-          color="brand.800"
-          fontWeight="700"
-          fontSize={["0.6875rem", "0.8125rem"]}
-          lineHeight="14px"
-          letterSpacing="4.2px"
-          textAlign="center"
-          marginBottom="18px"
-          textTransform="uppercase"
+      <FormControl id="color">
+        <Flex
+          flexDirection={["column", "row"]}
+          justifyContent={[null, "space-between"]}
+          alignItems={["center", "baseline"]}
         >
-          Color
-        </Heading>
-        <Stack direction="row" spacing="16px" {...group}>
-          {colors.map((value) => {
-            const radio = getRadioProps({ value });
-            return <RadioColor bg={value} key={value} {...radio}></RadioColor>;
-          })}
-        </Stack>
-      </Flex>
+          <FormLabel
+            color="brand.800"
+            fontWeight="700"
+            fontSize={["0.6875rem", "0.8125rem"]}
+            lineHeight="14px"
+            letterSpacing="4.2px"
+            textAlign="center"
+            marginBottom="18px"
+            textTransform="uppercase"
+          >
+            Color
+          </FormLabel>
+
+          <Stack direction="row" spacing="16px" {...getRootProps()}>
+            {colors.map((value) => {
+              const radio = getRadioProps({ value });
+              return (
+                <RadioColor bg={value} key={value} {...radio}></RadioColor>
+              );
+            })}
+          </Stack>
+        </Flex>
+      </FormControl>
     </>
   );
 };
