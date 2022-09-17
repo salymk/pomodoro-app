@@ -23,9 +23,11 @@ import TimerInput from "./TimerInput";
 import ColorGroup from "./ColorGroup";
 import FontGroup from "./FontGroup";
 import { CloseIcon } from "../Icons/Icons";
+import { selectFont } from "../features/font/fontSlice";
 
 const SettingsModal = ({ isOpen, onClose }) => {
   const font = useSelector((state) => state.fontSelector.font);
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -34,8 +36,8 @@ const SettingsModal = ({ isOpen, onClose }) => {
   } = useForm();
 
   const onSubmit = (data) => {
-    debugger;
     console.log(data);
+    dispatch(selectFont(data.font));
   };
 
   return (
