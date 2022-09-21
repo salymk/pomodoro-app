@@ -7,12 +7,10 @@ import {
   NumberDecrementStepper,
   FormControl,
   FormLabel,
-  FormErrorMessage,
-  FormHelperText,
 } from "@chakra-ui/react";
 import { ArrowUpIcon, ArrowDownIcon } from "../Icons/Icons";
 
-const TimerInput = ({ defaultValue, label }) => {
+const TimerInput = ({ defaultValue, label, field }) => {
   return (
     <FormControl
       display="flex"
@@ -29,6 +27,7 @@ const TimerInput = ({ defaultValue, label }) => {
         {label}
       </FormLabel>
       <NumberInput
+        {...field}
         defaultValue={defaultValue}
         min={1}
         w="140px"
