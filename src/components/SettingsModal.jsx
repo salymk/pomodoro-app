@@ -12,9 +12,6 @@ import {
   Stack,
   Flex,
   IconButton,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
 } from "@chakra-ui/react";
 import { useSelector, useDispatch } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
@@ -25,23 +22,31 @@ import FontGroup from "./FontGroup";
 import { CloseIcon } from "../Icons/Icons";
 import { selectFont } from "../features/font/fontSlice";
 import { selectColor } from "../features/color/colorSlice";
+import {
+  setPomodoro,
+  setShortBreak,
+  setLongBreak,
+} from "../features/time/timeSlice";
 
 const SettingsModal = ({ isOpen, onClose }) => {
   const font = useSelector((state) => state.fontSelector.font);
   const color = useSelector((state) => state.colorSelector.color);
 
   const dispatch = useDispatch();
-  const {
-    register,
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm();
+  const { handleSubmit, control } = useForm({
+    defaultValues: {
+      pomodoro: 25,
+      shortBreak: 5,
+      longBreak: 15,
+    },
+  });
 
   const onSubmit = (data) => {
-    console.log(data);
     dispatch(selectFont(data.font));
     dispatch(selectColor(data.color));
+    dispatch(setPomodoro(data.pomodoro));
+    dispatch(setShortBreak(data.shortBreak));
+    dispatch(setLongBreak(data.longBreak));
   };
 
   return (
@@ -116,9 +121,41 @@ const SettingsModal = ({ isOpen, onClose }) => {
                 flexDirection={["column", "row"]}
                 alignItems="baseline"
               >
-                <TimerInput defaultValue={25} label="pomodoro" />
-                <TimerInput defaultValue={5} label="short break" />
-                <TimerInput defaultValue={15} label="long break" />
+                <Controller
+                  control={control}
+                  name="pomodoro"
+                  render={({ field }) => (
+                    <TimerInput
+                      field={field}
+                      defaultValue={25}
+                      label="pomodoro"
+                    />
+                  )}
+                />
+
+                <Controller
+                  control={control}
+                  name="shortBreak"
+                  render={({ field }) => (
+                    <TimerInput
+                      field={field}
+                      defaultValue={5}
+                      label="short break"
+                    />
+                  )}
+                />
+
+                <Controller
+                  control={control}
+                  name="longBreak"
+                  render={({ field }) => (
+                    <TimerInput
+                      field={field}
+                      defaultValue={15}
+                      label="long break"
+                    />
+                  )}
+                />
               </Stack>
               <Divider borderBottomWidth="2px" color="hsla(0, 2%, 89%, 1)" />
               <Stack py="24px">
