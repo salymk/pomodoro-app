@@ -30,6 +30,9 @@ const CustomTab = ({ children }) => {
 };
 
 const TimerTabs = () => {
+  const pomodoro = useSelector((state) => state.timeSetter.pomodoro);
+  const shortBreak = useSelector((state) => state.timeSetter.shortBreak);
+  const longBreak = useSelector((state) => state.timeSetter.longBreak);
   return (
     <Tabs
       variant="unstyled"
@@ -49,13 +52,13 @@ const TimerTabs = () => {
       </TabList>
       <TabPanels mt={["48px", "109px", "45px"]}>
         <TabPanel px="0">
-          <Timer time="17:59" state="pause" />
+          <Timer time={pomodoro} state="pause" />
         </TabPanel>
         <TabPanel px="0">
-          <Timer time="5:00" state="start" />
+          <Timer time={shortBreak} state="start" />
         </TabPanel>
         <TabPanel px="0">
-          <Timer time="15:00" state="start" />
+          <Timer time={longBreak} state="start" />
         </TabPanel>
       </TabPanels>
     </Tabs>
