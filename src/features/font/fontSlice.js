@@ -10,7 +10,6 @@ export const fontSlice = createSlice({
   reducers: {
     selectFont: (state, action) => {
       state.font = action.payload;
-      console.log(state.font);
     },
   },
 });
